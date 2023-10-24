@@ -14,7 +14,8 @@ left_side = sg.Column([
     [sg.Text("First Name: "), sg.Input(key="firstname", do_not_clear=False)],
     [sg.Text("Last Name: "), sg.Input(key="lastname", do_not_clear=False)],
     [sg.Text("Student ID: "), sg.Input(key="id", do_not_clear=False)],
-    [sg.Button("Add Student")]  
+    [sg.Button("Add Student")],  
+    [sg.Button("Remove Student")] 
 ], element_justification='l', expand_x=True, expand_y=True)
 
 right_side = sg.Column([
@@ -95,6 +96,10 @@ while True:
     if event == "Add Student":
         user = {"id": values['id'], "firstname": values['firstname'], "lastname": values['lastname']}
         utils.add_student_to_db(user,cursor,cnx)
+
+    if event == "Remove Student":
+        user = {"id": values['id'], "firstname": values['firstname'], "lastname": values['lastname']}
+        utils.remove_student_from_db(user,cursor,cnx)
 
     if event == "Add Course":
         course = {"coursename": values['coursename'], "CRN": values['CRN']}

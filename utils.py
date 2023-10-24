@@ -10,7 +10,10 @@ insert_course = ("INSERT INTO courses "
 
 register_course = ("UPDATE students SET courseId=%s WHERE studentId=%s")
 
-get_students = ("SELECT students.firstName,students.lastName, courses.courseName from students INNER JOIN courses ON students.courseId=courses.CRN")
+get_students = ("SELECT students.firstName,students.lastName, courses.courseName "
+                "from students INNER JOIN courses ON students.courseId=courses.CRN")
+
+remove_student = ("DELETE from students WHERE studentId=%s AND firstname=%s AND lastname=%s")
 
 table_data = []
 
@@ -35,4 +38,8 @@ def get_students_from_db(cursor):
     for(firstname, lastname, coursename) in cursor:
         table_data.append([firstname +" "+ lastname, coursename])
     return table_data
+
+def remove_student_from_db(user,cursor,cnx):
+    cursor.execute(remove_student, (user.get("id"),user.get("firstname"),user.get("lastname")))
+    cnx.commit()
 
