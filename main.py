@@ -22,6 +22,7 @@ right_side = sg.Column([
     [sg.Text("Course Name: "), sg.Input(key="coursename", do_not_clear=False)],
     [sg.Text("Course ID: "), sg.Input(key="CRN", do_not_clear=False)],
     [sg.Button("Add Course")],
+    [sg.Button("Remove Course")]
 ], element_justification='r', expand_x=True, expand_y=True)
 
 layout1 = [
@@ -35,7 +36,7 @@ layout2 = [
     [sg.Text("Registration", font = ('Avenir Next',12, 'bold'))],
     [sg.Text("Course ID: "), sg.Input(key="CRN_2", do_not_clear=False)],
     [sg.Text("Student ID: "), sg.Input(key="id_2", do_not_clear=False)],
-    [sg.Button("Register Course")] 
+    [sg.Button("Register Course")]
 ]
 
 #list page layout 
@@ -100,6 +101,10 @@ while True:
     if event == "Remove Student":
         user = {"id": values['id'], "firstname": values['firstname'], "lastname": values['lastname']}
         utils.remove_student_from_db(user,cursor,cnx)
+
+    if event == "Remove Course":
+        course = {"CRN": values['CRN'], "coursename": values['coursename']}
+        utils.remove_course_from_db(course,cursor,cnx)
 
     if event == "Add Course":
         course = {"coursename": values['coursename'], "CRN": values['CRN']}

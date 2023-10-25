@@ -15,8 +15,9 @@ get_students = ("SELECT students.firstName,students.lastName, courses.courseName
 
 remove_student = ("DELETE from students WHERE studentId=%s AND firstname=%s AND lastname=%s")
 
-table_data = []
+remove_course = ("DELETE from courses WHERE CRN=%s AND courseName=%s")
 
+table_data = []
 
 def add_student_to_db(user,cursor, cnx):
     # Sample User : { "firstname": "Valerie", "lastname": "Naufal", "id": "382761819" }
@@ -43,3 +44,6 @@ def remove_student_from_db(user,cursor,cnx):
     cursor.execute(remove_student, (user.get("id"),user.get("firstname"),user.get("lastname")))
     cnx.commit()
 
+def remove_course_from_db(course,cursor,cnx):
+    cursor.execute(remove_course, (course.get("CRN"),course.get("coursename")))
+    cnx.commit()
