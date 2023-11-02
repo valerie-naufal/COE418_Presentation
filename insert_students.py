@@ -34,7 +34,7 @@ if __name__ == "__main__":
             
             #Adding the Students to MySQL DB
             for user in users:
-                add_student_to_db(user);
+                add_student_to_db(user)
         
         print("STUDENTS INSERTED INTO DB")
         cnx.close()
